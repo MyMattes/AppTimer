@@ -1,12 +1,3 @@
-//
-//  ATAppDelegate.m
-//  AppTimer
-//
-//  Created by Matthias Arndt on 18.07.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-// Button zum Zurücksetzen
-
 #import "ATAppDelegate.h"
 
 @implementation ATAppDelegate
@@ -25,19 +16,23 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	[[NSApplication sharedApplication] hide:self];
-
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
 	[self setSecondsLeft:[defaults integerForKey:@"kSecondsLeft"]];
 	if ([self secondsLeft] == 0) [self setSecondsLeft:[self resetSeconds]];
+	
 	[self setApplicationBundleID:[defaults stringForKey:@"kApplicationBundleID"]];
 	if ([self applicationBundleID] == nil) [self setApplicationBundleID:@"com.Mojang Specifications.Minecraft.Minecraft"];
 
 	NSLog(@"Monitoring \"%@\" started.", [self applicationBundleID]);
 
+	// Register for notifications if an app was launched or terminated
+
 	NSNotificationCenter *nc = [[NSWorkspace sharedWorkspace] notificationCenter];
 	[nc addObserver:self selector:@selector(launchedApplication:) name:@"NSWorkspaceDidLaunchApplicationNotification" object:nil];
 	[nc addObserver:self selector:@selector(stoppedApplication:) name:@"NSWorkspaceDidTerminateApplicationNotification" object:nil];
+	
+	// Check already running apps
 	
 	NSArray *runningApplications = [[NSWorkspace sharedWorkspace] runningApplications];
 	for (NSRunningApplication *runningApplication in runningApplications)
@@ -107,6 +102,8 @@
 - (IBAction)timerReset:(id)sender
 {
 	[self setSecondsLeft:[self resetSeconds]];
+	NSLog(@"Timer reset to %i seconds.", [self secondsLeft]);
+
 	[self refreshDisplay];
 }
 
@@ -123,6 +120,8 @@
 
 	NSSound *systemSound = [NSSound soundNamed:@"alarm.aif"];
 	if (systemSound) [systemSound play];
+
+	NSLog(@"Timer elapsed.");
 }
 
 - (void)refreshDisplay
@@ -130,6 +129,8 @@
 	int hours = [self secondsLeft] / 3600;
 	int minutes = ([self secondsLeft] - hours * 3600) / 60;
 	int seconds = [self secondsLeft] - hours * 3600 - minutes * 60;
+	
+	// Black = application not running, blue = application running, red = timer elapsed
 	
 	if ([[self applicationTimer] isValid]) [textField setTextColor:[NSColor blueColor]];
 	else [textField setTextColor:[NSColor blackColor]];
@@ -141,7 +142,17 @@
 
 - (int)resetSeconds
 {
-	return 5400;
+	// Read time limit from defaults, limit = 1:30 h if not specified
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	int returnValue = [defaults integerForKey:@"kSecondsAllowed"];
+	if (returnValue == 0)
+	{
+		returnValue = 5400;
+		[defaults setInteger:returnValue forKey:@"kSecondsAllowed"];
+	}
+
+	return returnValue;
 }
 
 @end
