@@ -9,7 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ATAppDelegate : NSObject <NSApplicationDelegate>
+{
+	IBOutlet NSTextField *textField;
+}
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) int secondsLeft;
+@property (retain) NSString *applicationBundleID;
+@property (retain) NSTimer *applicationTimer;
 
 @end

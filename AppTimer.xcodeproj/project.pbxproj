@@ -13,6 +13,8 @@
 		39798CAD15B70BA7009C1193 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 39798CAB15B70BA7009C1193 /* Credits.rtf */; };
 		39798CB015B70BA7009C1193 /* ATAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39798CAF15B70BA7009C1193 /* ATAppDelegate.m */; };
 		39798CB315B70BA7009C1193 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39798CB115B70BA7009C1193 /* MainMenu.xib */; };
+		39798CE715B712BA009C1193 /* alarm.aif in Resources */ = {isa = PBXBuildFile; fileRef = 39798CE615B711BF009C1193 /* alarm.aif */; };
+		39CF9C2A15B7288F00FF826D /* stopwatch.icns in Resources */ = {isa = PBXBuildFile; fileRef = 39CF9C2915B7288F00FF826D /* stopwatch.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +23,16 @@
 		39798C9F15B70BA6009C1193 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		39798CA015B70BA6009C1193 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		39798CA115B70BA6009C1193 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		39798CA415B70BA6009C1193 /* AppTimer-Info.plist */ = {isa = PBXFileReference; path = "AppTimer-Info.plist"; sourceTree = "<group>"; };
+		39798CA415B70BA6009C1193 /* AppTimer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppTimer-Info.plist"; sourceTree = "<group>"; };
 		39798CA615B70BA6009C1193 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		39798CA815B70BA6009C1193 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		39798CAA15B70BA7009C1193 /* AppTimer-Prefix.pch */ = {isa = PBXFileReference; path = "AppTimer-Prefix.pch"; sourceTree = "<group>"; };
+		39798CAA15B70BA7009C1193 /* AppTimer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppTimer-Prefix.pch"; sourceTree = "<group>"; };
 		39798CAC15B70BA7009C1193 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		39798CAE15B70BA7009C1193 /* ATAppDelegate.h */ = {isa = PBXFileReference; path = ATAppDelegate.h; sourceTree = "<group>"; };
+		39798CAE15B70BA7009C1193 /* ATAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ATAppDelegate.h; sourceTree = "<group>"; };
 		39798CAF15B70BA7009C1193 /* ATAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ATAppDelegate.m; sourceTree = "<group>"; };
 		39798CB215B70BA7009C1193 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		39798CE615B711BF009C1193 /* alarm.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.aif; sourceTree = "<group>"; };
+		39CF9C2915B7288F00FF826D /* stopwatch.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = stopwatch.icns; path = ../stopwatch.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				39798CA415B70BA6009C1193 /* AppTimer-Info.plist */,
+				39798CE615B711BF009C1193 /* alarm.aif */,
+				39CF9C2915B7288F00FF826D /* stopwatch.icns */,
 				39798CA515B70BA6009C1193 /* InfoPlist.strings */,
 				39798CA815B70BA6009C1193 /* main.m */,
 				39798CAA15B70BA7009C1193 /* AppTimer-Prefix.pch */,
@@ -156,6 +162,8 @@
 				39798CA715B70BA6009C1193 /* InfoPlist.strings in Resources */,
 				39798CAD15B70BA7009C1193 /* Credits.rtf in Resources */,
 				39798CB315B70BA7009C1193 /* MainMenu.xib in Resources */,
+				39798CE715B712BA009C1193 /* alarm.aif in Resources */,
+				39CF9C2A15B7288F00FF826D /* stopwatch.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,10 +257,12 @@
 		39798CB715B70BA7009C1193 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Matthias Arndt";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppTimer/AppTimer-Prefix.pch";
 				INFOPLIST_FILE = "AppTimer/AppTimer-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -260,10 +270,12 @@
 		39798CB815B70BA7009C1193 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Matthias Arndt";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppTimer/AppTimer-Prefix.pch";
 				INFOPLIST_FILE = "AppTimer/AppTimer-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -287,6 +299,7 @@
 				39798CB815B70BA7009C1193 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
